@@ -1,0 +1,27 @@
+{
+  "private": true,
+  "scripts": {
+    "start": "pnpm run --parallel start",
+    "build": "pnpm run --parallel build",
+    "postinstall": "pnpm run --parallel postinstall",
+    "install": "pnpm i",
+    "prettier": "prettier --write '**/*.{js,jsx,tsx,ts,less,md,json}'"
+  },
+  "gitHooks": {
+    "pre-commit": "lint-staged"
+  },
+  "lint-staged": {
+    "*.{js,jsx,less,md,json}": [
+      "prettier --write"
+    ],
+    "*.ts?(x)": [
+      "prettier --parser=typescript --write"
+    ]
+  },
+  "devDependencies": {
+    "lint-staged": "^10.0.7",
+    "prettier": "^2.2.0",
+    "typescript": "^4.1.2",
+    "yorkie": "^2.0.0"
+  }
+}
