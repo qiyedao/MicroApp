@@ -7,7 +7,7 @@
     "build": "pnpm  --parallel build",
     "postinstall": "pnpm  --parallel postinstall",
     "install": "pnpm i",
-    "prettier": "prettier --write '**/*.{js,jsx,tsx,ts,less,md,json}'"
+    "prettier": "pnpm  --parallel  prettier "
   },
   "gitHooks": {
     "pre-commit": "lint-staged"
