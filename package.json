@@ -1,7 +1,7 @@
 {
   "private": true,
   "scripts": {
-    "start": "npm-run-all -l -s start:slave",
+    "start": "npm-run-all -l -s start:master",
     "start:master": "pnpm --filter=./packages/umi3Base start",
     "start:slave": "pnpm --filter=\"!./packages/umi3Base\" --parallel start",
     "build": "pnpm  --parallel build",
