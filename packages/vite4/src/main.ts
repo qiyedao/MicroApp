@@ -1,22 +1,16 @@
 import { createApp } from 'vue';
 import App from './App.vue';
-import {
-  renderWithQiankun,
-  qiankunWindow,
-  QiankunProps,
-} from 'vite-plugin-qiankun/dist/helper';
+
 import routes from './router/index';
 import { createWebHistory, createRouter } from 'vue-router';
-const render = (props: QiankunProps = {}) => {
+const render = (props: any = {}) => {
   console.log('props', props);
 
   const { container } = props;
   const el: string | Element = container?.querySelector('#app') || '#app'; // 避免 id 重复导致微应用挂载失败
   const app = createApp(App);
   const router = createRouter({
-    history: createWebHistory(
-      qiankunWindow.__POWERED_BY_QIANKUN__ ? props.base : '/',
-    ),
+    history: createWebHistory(window.__POWERED_BY_WUJIE__ ? props.base : '/'),
 
     routes,
   });
@@ -24,23 +18,24 @@ const render = (props: QiankunProps = {}) => {
   app.mount(el);
 };
 
-const initQianKun = () => {
-  renderWithQiankun({
-    bootstrap() {
-      console.log('微应用：bootstrap');
-    },
-    mount(props) {
-      // 获取主应用传入数据
-      console.log('微应用：mount', props.name, 'history base', props.base);
-      render(props);
-    },
-    unmount(props) {
-      console.log('微应用：unmount', props);
-    },
-    update(props) {
-      console.log('微应用：update', props);
-    },
-  });
-};
-
-qiankunWindow.__POWERED_BY_QIANKUN__ ? initQianKun() : render(); // 判断是否使用 qiankun ，保证项目可以独立运行
+if (window.__POWERED_BY_WUJIE__) {
+  let instance: any;
+  window.__WUJIE_MOUNT = () => {
+    const router = createRouter({ history: createWebHistory(), routes });
+    instance = createApp(App);
+    instance.use(router);
+    instance.mount('#app');
+  };
+  window.__WUJIE_UNMOUNT = () => {
+    instance.unmount();
+  };
+  /*
+    由于vite是异步加载，而无界可能采用fiber执行机制
+    所以mount的调用时机无法确认，框架调用时可能vite
+    还没有加载回来，这里采用主动调用防止用没有mount
+    无界mount函数内置标记，不用担心重复mount
+  */
+  window.__WUJIE.mount();
+} else {
+  render();
+}
