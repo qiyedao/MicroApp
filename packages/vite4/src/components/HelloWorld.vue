@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-
+import { useRoute } from 'vue-router';
 const count = ref(0);
+const route = useRoute();
+console.log('vue route', route.query);
 </script>
 
 <template>

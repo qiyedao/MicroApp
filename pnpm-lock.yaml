@@ -9,7 +9,10 @@ importers:
       npm-run-all: ^4.1.5
       prettier: ^2.2.0
       typescript: ^4.1.2
+      wujie: ^1.0.6
       yorkie: ^2.0.0
+    dependencies:
+      wujie: 1.0.6
     devDependencies:
       husky: 8.0.3
       lint-staged: 10.5.4

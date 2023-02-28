@@ -12,7 +12,7 @@
     </div>
     <router-link to="/">index</router-link>
     <div></div>
-    <router-link to="/hello">hello</router-link>
+    <router-link to="/hello?vue=1">hello</router-link>
     <router-view></router-view>
   </div>
 </template>

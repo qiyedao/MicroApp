@@ -28,5 +28,8 @@
     "prettier": "^2.2.0",
     "typescript": "^4.1.2",
     "yorkie": "^2.0.0"
+  },
+  "dependencies": {
+    "wujie": "^1.0.6"
   }
 }
