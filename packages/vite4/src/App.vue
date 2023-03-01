@@ -10,9 +10,9 @@
         <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
       </a>
     </div>
-    <router-link to="/">index</router-link>
+    <router-link to="/">index----</router-link>
     <div></div>
-    <router-link to="/hello?vue=1">hello</router-link>
+    <router-link to="/hello?vue=1">hello----</router-link>
     <router-view></router-view>
   </div>
 </template>
