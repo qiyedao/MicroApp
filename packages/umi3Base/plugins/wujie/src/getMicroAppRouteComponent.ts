@@ -1,5 +1,5 @@
 import React from 'react';
-import WujieComponent from './WujieComponent';
+import { WujieComponent } from './WujieComponent';
 
 export function getMicroAppRouteComponent(opts: {
   appName: string;

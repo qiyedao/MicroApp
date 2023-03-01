@@ -16,7 +16,7 @@ module.exports = (api: IApi) => {
     },
     enableBy: api.EnableBy.config,
   });
-  api.addRuntimePlugin(() => '../../../plugins/wujie/src/runtime.ts');
+  api.addRuntimePlugin(() => '@@/plugin-wujie/masterRuntimePlugin');
 
   api.onGenerateFiles(() => {
     api.writeTmpFile({
@@ -24,7 +24,7 @@ module.exports = (api: IApi) => {
       content: `
       import React from 'react';
       import WujieReact from 'wujie-react';
-      export default function WujieComponent(props) {
+      export  function WujieComponent(props) {
         return (
           <WujieReact
             width="100%"
@@ -44,7 +44,7 @@ module.exports = (api: IApi) => {
       path: 'plugin-wujie/getMicroAppRouteComponent.ts',
       content: `
       import React from 'react';
-  import WujieComponent from './WujieComponent';
+  import {WujieComponent} from './WujieComponent';
   
   export function getMicroAppRouteComponent(opts: {
     appName: string;
@@ -77,20 +77,31 @@ module.exports = (api: IApi) => {
       
       `,
     });
+  });
+  api.addUmiExports(() => {
+    const pinnedExport = 'WujieComponent';
+    const exports: any[] = [
+      {
+        specifiers: [pinnedExport],
+        source: '../plugin-wujie/WujieComponent',
+      },
+    ];
 
-    api.addUmiExports(() => {
-      const pinnedExport = 'WujieComponent';
-      const exports: any[] = [
-        {
-          specifiers: [pinnedExport],
-          source: () => utils.winPath('../plugin-wujie/WujieComponent'),
-        },
-      ];
-
-      return exports;
-    });
+    return exports;
   });
 
+  api.addUmiExports(() => {
+    return {
+      specifiers: ['getMicroAppRouteComponent'],
+      source: '../plugin-wujie/getMicroAppRouteComponent',
+    };
+  });
+  api.addUmiExports(() => {
+    return {
+      specifiers: ['getMasterOptions'],
+      source: '../plugin-wujie/masterOptions',
+    };
+  });
   // modifyRoutes(api);
   api.onGenerateFiles(() => {
     const {
@@ -113,11 +124,4 @@ module.exports = (api: IApi) => {
       `,
     });
   });
-
-  // api.addUmiExports(() => {
-  //   return {
-  //     specifiers: ['getMicroAppRouteComponent'],
-  //     source: utils.winPath('../plugin-wujie/getMicroAppRouteComponent'),
-  //   };
-  // });
 };

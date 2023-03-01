@@ -12,5 +12,5 @@ module.exports = function (api: any) {
     },
   });
 
-  api.registerPlugins([require.resolve('./src')]);
+  api.registerPlugins([module.require('./src')]);
 };

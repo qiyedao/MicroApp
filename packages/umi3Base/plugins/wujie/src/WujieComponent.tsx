@@ -1,6 +1,6 @@
 import React from 'react';
 import WujieReact from 'wujie-react';
-export default function WujieComponent(props) {
+export function WujieComponent(props) {
   return (
     <WujieReact
       width="100%"

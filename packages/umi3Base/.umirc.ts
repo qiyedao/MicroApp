@@ -1,9 +1,10 @@
 import { defineConfig } from 'umi';
 
 export default defineConfig({
-  plugins: ['./plugins/wujie/index.ts'],
+  plugins: ['./plugins/wujie/src/index.ts'],
   wujie: {
     master: {
+      cors: true,
       apps: [
         {
           name: 'app1',
