@@ -1,7 +1,6 @@
 import { defineConfig } from 'umi';
 
 export default defineConfig({
-  plugins: ['./plugins/wujie/cjs/index.js'],
   wujie: {
     master: {
       apps: [

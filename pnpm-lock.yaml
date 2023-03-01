@@ -66,6 +66,7 @@ importers:
       react-dom: 17.x
       typescript: ^4.1.2
       umi: ^3.5.37
+      umi-plugin-wujie: ^0.0.2
       wujie-react: 1.0.6
       yorkie: ^2.0.0
     dependencies:
@@ -83,6 +84,7 @@ importers:
       lint-staged: 10.5.4
       prettier: 2.8.4
       typescript: 4.9.5
+      umi-plugin-wujie: 0.0.2
       yorkie: 2.0.0
 
   packages/vite4:
@@ -6886,6 +6888,13 @@ packages:
       loose-envify: 1.4.0
       object-assign: 4.1.1
 
+  /react/18.2.0:
+    resolution: {integrity: sha512-/3IjMdb2L9QbBdWiW5e3P2/npwMBaU9mHCSCUzNln0ZCYbcfTsGbTJrU/kGemdH2IWmB2ioZ+zkxtmq6g09fGQ==}
+    engines: {node: '>=0.10.0'}
+    dependencies:
+      loose-envify: 1.4.0
+    dev: true
+
   /read-pkg-up/7.0.1:
     resolution: {integrity: sha512-zK0TB7Xd6JpCLmlLmufqykGE+/TlOePD6qKClNW7hHDKFh/J7/7gCWGR7joEQEW1bKq3a3yUZSObOoWLFQ4ohg==}
     engines: {node: '>=8'}
@@ -7941,6 +7950,16 @@ packages:
     resolution: {integrity: sha512-s8ax/CeZdK9R/56Sui0WM6y9OFREJarMRHqLB2EwkovemBxNQ+Bqu8GAsUnVcXKgphb++ghr/B2BZx4mahujPw==}
     dev: true
 
+  /umi-plugin-wujie/0.0.2:
+    resolution: {integrity: sha512-AmJmKyc6eiCkxjNyJpIoYfQ/vrU8BXt2oMTFUsC43nsVDza6o3EtA5SYOnF8HPOECfatcqG8WjFcyWTndzauDw==}
+    dependencies:
+      react: 18.2.0
+      umi: 3.5.37
+      wujie-react: 1.0.6_react@18.2.0
+    transitivePeerDependencies:
+      - react-router
+    dev: true
+
   /umi-request/1.4.0:
     resolution: {integrity: sha512-OknwtQZddZHi0Ggi+Vr/olJ7HNMx4AzlywyK0W3NZBT7B0stjeZ9lcztA85dBgdAj3KVk8uPJPZSnGaDjELhrA==}
     dependencies:
@@ -8345,11 +8364,20 @@ packages:
       wujie: 1.0.6
     dev: false
 
+  /wujie-react/1.0.6_react@18.2.0:
+    resolution: {integrity: sha512-3bR7Aiij7bByCg6zQ45lr3QY5hN39DRb/ANy/7Qj7ow2PQueGgJHQJpVqo5S8AjybzmOOMNQD8dl1/2rQoi/xw==}
+    peerDependencies:
+      react: '>=16.0.0'
+    dependencies:
+      prop-types: 15.8.1
+      react: 18.2.0
+      wujie: 1.0.6
+    dev: true
+
   /wujie/1.0.6:
     resolution: {integrity: sha512-fwj/juMiSjQn7SwQzkNQyDqZSds51Hi2ZM6xK2B8tCLLEaribvKFimtdsa0Wsg6CceWoZRkRx+hgEN9dQeiluA==}
     dependencies:
       '@babel/runtime': 7.21.0
-    dev: false
 
   /xml-name-validator/3.0.0:
     resolution: {integrity: sha512-A5CUptxDsvxKJEU3yO6DuWBSJz/qizqzJKOMIfUJHETbBw/sFaDxgd6fxm1ewUaM0jZ444Fc5vC5ROYurg/4Pw==}
