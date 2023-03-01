@@ -2,7 +2,7 @@
   "name": "umi3base",
   "private": true,
   "scripts": {
-    "start": "umi dev",
+    "start": "cross-env PORT=8000 umi dev",
     "build": "umi build",
     "postinstall": "umi generate tmp",
     "prettier": "prettier -c --write \"src/**/*\"",
