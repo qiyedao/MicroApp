@@ -1,34 +1,54 @@
-import { IApi, IConfig, utils } from 'umi';
-import modifyRoutes from './modifyRoutes';
-export const defaultHistoryType = 'browser';
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, all) => {
+  for (var name in all)
+    __defProp(target, name, { get: all[name], enumerable: true });
+};
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key) && key !== except)
+        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
+  }
+  return to;
+};
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
 
-module.exports = (api: IApi) => {
+// src/index.ts
+var src_exports = {};
+__export(src_exports, {
+  defaultHistoryType: () => defaultHistoryType
+});
+module.exports = __toCommonJS(src_exports);
+var defaultHistoryType = "browser";
+module.exports = (api) => {
   api.describe({
-    key: 'wujie',
+    key: "wujie",
     config: {
       default: {},
       schema(joi) {
         return joi.object();
       },
-      onChange: api.ConfigChangeType.regenerateTmpFiles,
+      onChange: api.ConfigChangeType.regenerateTmpFiles
     },
-    enableBy: api.EnableBy.config,
+    enableBy: api.EnableBy.config
   });
-  api.addRuntimePlugin(() => '../plugin-wujie/masterRuntimePlugin');
-
+  api.addRuntimePlugin(() => "../plugin-wujie/masterRuntimePlugin");
   api.onGenerateFiles(() => {
     api.writeTmpFile({
-      path: 'plugin-wujie/WujieComponent.tsx',
+      path: "plugin-wujie/WujieComponent.tsx",
       content: `import React from 'react';
       import WujieReact from 'wujie-react';
       export function WujieComponent(props) {
         return <WujieReact width="100%" height="100%" {...props}></WujieReact>;
       }
       
-      `,
+      `
     });
     api.writeTmpFile({
-      path: 'plugin-wujie/getMicroAppRouteComponent.ts',
+      path: "plugin-wujie/getMicroAppRouteComponent.ts",
       content: `import React from 'react';
       import { WujieComponent } from './WujieComponent';
       
@@ -61,10 +81,10 @@ module.exports = (api: IApi) => {
       }
       
       
-      `,
+      `
     });
     api.writeTmpFile({
-      path: 'plugin-wujie/masterRuntimePlugin.ts',
+      path: "plugin-wujie/masterRuntimePlugin.ts",
       content: `import { ApplyPluginsType, IRoute, plugin } from 'umi';
       import {
         getMasterOptions,
@@ -139,53 +159,54 @@ module.exports = (api: IApi) => {
         return originRoute;
       }
       
-      `,
+      `
     });
   });
   api.addUmiExports(() => {
-    const pinnedExport = 'WujieComponent';
-    const exports: any[] = [
+    const pinnedExport = "WujieComponent";
+    const exports = [
       {
         specifiers: [pinnedExport],
-        source: '../plugin-wujie/WujieComponent',
-      },
+        source: "../plugin-wujie/WujieComponent"
+      }
     ];
-
     return exports;
   });
-
   api.addUmiExports(() => {
     return {
-      specifiers: ['getMicroAppRouteComponent'],
-      source: '../plugin-wujie/getMicroAppRouteComponent',
+      specifiers: ["getMicroAppRouteComponent"],
+      source: "../plugin-wujie/getMicroAppRouteComponent"
     };
   });
   api.addUmiExports(() => {
     return {
-      specifiers: ['getMasterOptions'],
-      source: '../plugin-wujie/masterOptions',
+      specifiers: ["getMasterOptions"],
+      source: "../plugin-wujie/masterOptions"
     };
   });
-  // modifyRoutes(api);
   api.onGenerateFiles(() => {
+    var _a;
     const {
-      config: { history },
+      config: { history }
     } = api;
-    const { master: options } = api.config?.wujie || {};
-    const masterHistoryType = (history && history?.type) || defaultHistoryType;
-    const base = api.config.base || '/';
-
+    const { master: options } = ((_a = api.config) == null ? void 0 : _a.wujie) || {};
+    const masterHistoryType = history && (history == null ? void 0 : history.type) || defaultHistoryType;
+    const base = api.config.base || "/";
     api.writeTmpFile({
-      path: 'plugin-wujie/masterOptions.js',
+      path: "plugin-wujie/masterOptions.js",
       content: `
       let options = ${JSON.stringify({
         masterHistoryType,
         base,
-        ...options,
+        ...options
       })};
       export const getMasterOptions = () => options;
       export const setMasterOptions = (newOpts) => options = ({ ...options, ...newOpts });
-      `,
+      `
     });
   });
 };
+// Annotate the CommonJS export names for ESM import in node:
+0 && (module.exports = {
+  defaultHistoryType
+});
