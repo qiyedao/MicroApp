@@ -1,8 +1,22 @@
 import { defineConfig } from 'umi';
 
 export default defineConfig({
-  plugins: ['./plugins/wujie/index.ts'],
-  wujie: {},
+  plugins: ['./plugins/wujie/cjs/index.js'],
+  wujie: {
+    master: {
+      apps: [
+        {
+          name: 'app1',
+          entry: '//localhost:8001', // html entry
+        },
+        {
+          name: 'app2',
+          entry: '//localhost:5173', // html entry
+          alive: true,
+        },
+      ],
+    },
+  },
   nodeModulesTransform: {
     type: 'none',
   },
@@ -13,11 +27,11 @@ export default defineConfig({
       routes: [
         {
           path: '/app1',
-          component: '@/app1/index',
+          microApp: 'app1',
         },
         {
           path: '/app2',
-          component: '@/app2/index',
+          microApp: 'app2',
         },
       ],
     },
